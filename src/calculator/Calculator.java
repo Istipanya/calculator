@@ -36,13 +36,14 @@ public class Calculator {
 
         Scanner op = new Scanner(System.in);
 
-      
+       System.out.println("Please enter operation");
         operation = op.next();
 
         if (operation == "+");
         {
             System.out.println("Additon = " + (num1 + num2));
         }
+        
         if  (operation == "-");
         {
             System.out.println("Subtraction = " + (num1 - num2));
@@ -54,7 +55,7 @@ public class Calculator {
         }
         if (operation == "*")
         {
-            System.out.println("Multiplication = 6" + (num1 * num2));
+            System.out.println("Multiplication = " + (num1 * num2));
         }
 
 
