@@ -260,7 +260,9 @@ public class calculator extends javax.swing.JFrame {
                                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton10))))
-                            .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -416,25 +418,28 @@ public class calculator extends javax.swing.JFrame {
         secondNum = Double.parseDouble(txtDisplay.getText());
 
         // perform operation
+        
+     
+        
         switch (oprt) {
             case "+":
                 answer = firstNum + secondNum;
-                //result = String.format("%.of", answer);
+
                 txtDisplay.setText(answer + " ");
                 break;
             case "-":
                 answer = firstNum - secondNum;
-                //result = String.format("%.of", answer);
+
                 txtDisplay.setText(answer + " ");
                 break;
             case "/":
                 answer = firstNum / secondNum;
-                // result = String.format("%.of", answer);
+
                 txtDisplay.setText(answer + " ");
-                break;
+              break;
             case "*":
-                answer = firstNum * secondNum;
-                // result = String.format("%.of", answer);
+               answer = firstNum * secondNum;
+
                 txtDisplay.setText(answer + " ");
                 break;
         }
@@ -487,6 +492,7 @@ public class calculator extends javax.swing.JFrame {
 
             // clear display in txtDisplay
             txtDisplay.setText("");
+             oprt = "-";
         } else {
             // get second
             secondNum = Double.parseDouble(txtDisplay.getText());
@@ -511,6 +517,7 @@ public class calculator extends javax.swing.JFrame {
 
             // clear display in txtDisplay
             txtDisplay.setText("");
+             oprt = "/";
         } else {
             // get second
             secondNum = Double.parseDouble(txtDisplay.getText());
@@ -535,6 +542,7 @@ public class calculator extends javax.swing.JFrame {
 
             // clear display in txtDisplay
             txtDisplay.setText("");
+             oprt = "*";
         } else {
             // get second
             secondNum = Double.parseDouble(txtDisplay.getText());
