@@ -18,8 +18,11 @@ public class calculator extends javax.swing.JFrame {
     private double firstNum;
     private double secondNum;
     private String number;
-    private String oprt;
+    private String operator;
     private double answer;
+    private double squared;
+    private double powered;
+    private double squareRoot;
 
     public calculator() {
         initComponents();
@@ -70,6 +73,13 @@ public class calculator extends javax.swing.JFrame {
         jButton19.setText("jButton13");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtEquation.setEditable(false);
+        txtEquation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEquationActionPerformed(evt);
+            }
+        });
 
         txtDisplay.setEditable(false);
         txtDisplay.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -162,6 +172,11 @@ public class calculator extends javax.swing.JFrame {
         });
 
         jButton14.setText("X^2");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setText("-");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +193,11 @@ public class calculator extends javax.swing.JFrame {
         });
 
         jButton17.setText("X^Y");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setText("/");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +207,11 @@ public class calculator extends javax.swing.JFrame {
         });
 
         jButton20.setText("sq. rt");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
         jButton21.setText("SIN");
 
@@ -315,9 +340,7 @@ public class calculator extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton26))
+                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,7 +377,10 @@ public class calculator extends javax.swing.JFrame {
                             .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -418,14 +444,12 @@ public class calculator extends javax.swing.JFrame {
         secondNum = Double.parseDouble(txtDisplay.getText());
 
         // perform operation
-        
-     
-        
-        switch (oprt) {
+        switch (operator) {
             case "+":
                 answer = firstNum + secondNum;
 
                 txtDisplay.setText(answer + " ");
+                
                 break;
             case "-":
                 answer = firstNum - secondNum;
@@ -436,9 +460,9 @@ public class calculator extends javax.swing.JFrame {
                 answer = firstNum / secondNum;
 
                 txtDisplay.setText(answer + " ");
-              break;
+                break;
             case "*":
-               answer = firstNum * secondNum;
+                answer = firstNum * secondNum;
 
                 txtDisplay.setText(answer + " ");
                 break;
@@ -449,6 +473,7 @@ public class calculator extends javax.swing.JFrame {
         // append second number to equation
         String eqn = txtEquation.getText();
         txtEquation.setText("=" + eqn + secondNum);
+       
 
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -466,7 +491,7 @@ public class calculator extends javax.swing.JFrame {
             txtDisplay.setText(" ");
 
             // keep track of operation
-            oprt = "+";
+            operator = "+";
         } else {
             // get second
             secondNum = Double.parseDouble(txtDisplay.getText());
@@ -476,7 +501,9 @@ public class calculator extends javax.swing.JFrame {
 
             // display result in equation
             txtEquation.setText(answer + " + ");
+            
         }
+        
 
 
     }//GEN-LAST:event_jButton13ActionPerformed
@@ -492,7 +519,7 @@ public class calculator extends javax.swing.JFrame {
 
             // clear display in txtDisplay
             txtDisplay.setText("");
-             oprt = "-";
+            operator = "-";
         } else {
             // get second
             secondNum = Double.parseDouble(txtDisplay.getText());
@@ -502,6 +529,7 @@ public class calculator extends javax.swing.JFrame {
 
             // display result in equation
             txtEquation.setText(answer + " - ");
+           
         }
 
     }//GEN-LAST:event_jButton15ActionPerformed
@@ -517,7 +545,7 @@ public class calculator extends javax.swing.JFrame {
 
             // clear display in txtDisplay
             txtDisplay.setText("");
-             oprt = "/";
+            operator = "/";
         } else {
             // get second
             secondNum = Double.parseDouble(txtDisplay.getText());
@@ -527,6 +555,7 @@ public class calculator extends javax.swing.JFrame {
 
             // display result in equation
             txtEquation.setText(answer + " / ");
+            
         }
         // jButton1ActionPerformed(evt);
     }//GEN-LAST:event_jButton18ActionPerformed
@@ -542,7 +571,7 @@ public class calculator extends javax.swing.JFrame {
 
             // clear display in txtDisplay
             txtDisplay.setText("");
-             oprt = "*";
+            operator = "*";
         } else {
             // get second
             secondNum = Double.parseDouble(txtDisplay.getText());
@@ -552,6 +581,7 @@ public class calculator extends javax.swing.JFrame {
 
             // display result in equation
             txtEquation.setText(answer + " * ");
+           
         }
         // jButton1ActionPerformed(evt);
     }//GEN-LAST:event_jButton16ActionPerformed
@@ -570,6 +600,35 @@ public class calculator extends javax.swing.JFrame {
         operan = operan * (-1);
         txtDisplay.setText(String.valueOf(operan));
     }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        firstNum = Double.parseDouble(txtDisplay.getText());
+        squared = firstNum * firstNum;
+        txtDisplay.setText(squared + " " );
+        txtEquation.setText(firstNum + " ^ 2 ");
+        
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+       firstNum = Double.parseDouble(txtDisplay.getText());
+       secondNum = Double.parseDouble(txtDisplay.getText());
+        powered = Math.pow(firstNum, secondNum);
+        txtDisplay.setText(powered + " ");
+        txtEquation.setText(firstNum + " ^ " + secondNum);
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void txtEquationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEquationActionPerformed
+        
+    }//GEN-LAST:event_txtEquationActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+       // square root
+         firstNum = Double.parseDouble(txtDisplay.getText());
+        
+         double squareRoot = Math.sqrt(firstNum);
+        txtDisplay.setText(squareRoot + " " );
+        txtEquation.setText("sq.rt of: " + firstNum + " is " + squareRoot);
+    }//GEN-LAST:event_jButton20ActionPerformed
 
     /**
      * @param args the command line arguments
