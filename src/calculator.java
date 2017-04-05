@@ -90,6 +90,11 @@ public class calculator extends javax.swing.JFrame {
         txtDisplay.setEditable(false);
         txtDisplay.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtDisplay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDisplayKeyTyped(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -448,13 +453,14 @@ public class calculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(num7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(num8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(num9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(multSign, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(sin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cos, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(num7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(num8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(num9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(multSign, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(cos, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(divSign, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
@@ -580,14 +586,37 @@ public class calculator extends javax.swing.JFrame {
             // keep track of operation
             operator = "+";
         } else {
-            // get second
-            secondNum = Double.parseDouble(txtDisplay.getText());
 
-            // perform operation
-            answer = firstNum + secondNum;
+            // detect if equation has = sign
+            if (txtEquation.getText().indexOf("=") == 0) {
 
-            // display result in equation
-            txtEquation.setText(answer + " + ");
+                // make display no. as the first
+                firstNum = Double.parseDouble(txtDisplay.getText());
+
+                // update equation display
+                txtEquation.setText(firstNum + " + ");
+
+                // clear display
+                txtDisplay.setText("");
+
+                // note operator
+                operator = "+";
+            } else {
+                // get second
+                secondNum = Double.parseDouble(txtDisplay.getText());
+
+                // perform operation
+                answer = firstNum + secondNum;
+
+                // display result in equation
+                txtEquation.setText(answer + " + ");
+
+                // clear display
+                txtDisplay.setText("");
+
+                // answer becomes the first num
+                firstNum = answer;
+            }
 
         }
 
@@ -607,14 +636,36 @@ public class calculator extends javax.swing.JFrame {
             txtDisplay.setText("");
             operator = "-";
         } else {
-            // get second
-            secondNum = Double.parseDouble(txtDisplay.getText());
 
-            // perform operation
-            answer = firstNum - (secondNum);
+            if (txtEquation.getText().indexOf("=") == 0) {
 
-            // display result in equation
-            txtEquation.setText(answer + " - ");
+                // make display no. as the first
+                firstNum = Double.parseDouble(txtDisplay.getText());
+
+                // update equation display
+                txtEquation.setText(firstNum + " - ");
+
+                // clear display
+                txtDisplay.setText("");
+
+                // note operator
+                operator = "";
+            } else {
+                // get second
+                secondNum = Double.parseDouble(txtDisplay.getText());
+
+                // perform operation
+                answer = firstNum - secondNum;
+
+                // display result in equation
+                txtEquation.setText(answer + " - ");
+
+                // clear display
+                txtDisplay.setText("");
+
+                // answer becomes the first num
+                firstNum = answer;
+            }
 
         }
 
@@ -633,14 +684,37 @@ public class calculator extends javax.swing.JFrame {
             txtDisplay.setText("");
             operator = "/";
         } else {
-            // get second
-            secondNum = Double.parseDouble(txtDisplay.getText());
 
-            // perform operation
-            answer = firstNum / secondNum;
+            if (txtEquation.getText().indexOf("=") == 0) {
 
-            // display result in equation
-            txtEquation.setText(answer + " / ");
+                // make display no. as the first
+                firstNum = Double.parseDouble(txtDisplay.getText());
+
+                // update equation display
+                txtEquation.setText(firstNum + " / ");
+
+                // clear display
+                txtDisplay.setText("");
+
+                // note operator
+                operator = "/";
+            }
+            else{
+                // get second
+                secondNum = Double.parseDouble(txtDisplay.getText());
+
+                // perform operation
+                answer = firstNum / secondNum;
+
+                // display result in equation
+                txtEquation.setText(answer + " / ");
+                
+                // clear display
+                txtDisplay.setText("");
+                
+                // answer becomes the first num
+                firstNum = answer;
+            }
 
         }
         // jButton1ActionPerformed(evt);
@@ -659,14 +733,36 @@ public class calculator extends javax.swing.JFrame {
             txtDisplay.setText("");
             operator = "*";
         } else {
-            // get second
-            secondNum = Double.parseDouble(txtDisplay.getText());
+            if (txtEquation.getText().indexOf("=") == 0) {
 
-            // perform operation
-            answer = firstNum * secondNum;
+                // make display no. as the first
+                firstNum = Double.parseDouble(txtDisplay.getText());
 
-            // display result in equation
-            txtEquation.setText(answer + " * ");
+                // update equation display
+                txtEquation.setText(firstNum + " * ");
+
+                // clear display
+                txtDisplay.setText("");
+
+                // note operator
+                operator = "*";
+            }
+           else{
+                // get second
+                secondNum = Double.parseDouble(txtDisplay.getText());
+
+                // perform operation
+                answer = firstNum * secondNum;
+
+                // display result in equation
+                txtEquation.setText(answer + " * ");
+                
+                // clear display
+                txtDisplay.setText("");
+                
+                // answer becomes the first num
+                firstNum = answer;
+            }
 
         }
         // jButton1ActionPerformed(evt);
@@ -688,7 +784,7 @@ public class calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_operanActionPerformed
 
     private void squareBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareBtnActionPerformed
-       // raise to 2
+        // raise to 2
         firstNum = Double.parseDouble(txtDisplay.getText());
         squared = firstNum * firstNum;
         txtDisplay.setText(squared + " ");
@@ -697,17 +793,16 @@ public class calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_squareBtnActionPerformed
 
     private void XYbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XYbtnActionPerformed
-       // raise to N
-        
+        // raise to N
+
         firstNum = Double.parseDouble(txtDisplay.getText());
         secondNum = Double.parseDouble(txtDisplay.getText());
-        
-        powered = Math.pow(firstNum, secondNum);
+
+        powered = Math.pow(firstNum, firstNum);
         txtDisplay.setText(powered + " ");
         txtEquation.setText(firstNum + " ^ " + secondNum);
-        
-        
-       
+
+
     }//GEN-LAST:event_XYbtnActionPerformed
 
     private void txtEquationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEquationActionPerformed
@@ -737,42 +832,48 @@ public class calculator extends javax.swing.JFrame {
 
     private void cosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cosActionPerformed
         // COSINE
-        
+
         firstNum = Double.parseDouble(txtDisplay.getText());
         double degrees = firstNum;
         double radians = Math.toRadians(firstNum);
         double cosine = Math.cos(radians);
         txtDisplay.setText(cosine + " ");
-        txtEquation.setText("Cosine of : " + firstNum + " = " );
-        
+        txtEquation.setText("Cosine of : " + firstNum + " = ");
+
     }//GEN-LAST:event_cosActionPerformed
 
     private void tanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanActionPerformed
         // Tangent
-        
+
         firstNum = Double.parseDouble(txtDisplay.getText());
         double degrees = firstNum;
         double radians = Math.toRadians(firstNum);
         double tangent = Math.tan(radians);
         txtDisplay.setText(tangent + " ");
-        txtEquation.setText("Tangent of : " + firstNum + " = " );
+        txtEquation.setText("Tangent of : " + firstNum + " = ");
     }//GEN-LAST:event_tanActionPerformed
 
     private void logActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logActionPerformed
-         firstNum = Double.parseDouble(txtDisplay.getText());
-         double log = Math.log(firstNum);
-         txtDisplay.setText(log + " ");
-         txtEquation.setText("Log of : " + firstNum + " = ");
+        //Log 
+
+        firstNum = Double.parseDouble(txtDisplay.getText());
+        double log = Math.log(firstNum);
+        txtDisplay.setText(log + " ");
+        txtEquation.setText("Log of : " + firstNum + " = ");
     }//GEN-LAST:event_logActionPerformed
 
     private void cubedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cubedBtnActionPerformed
         // cuberoot
-        
+
         firstNum = Double.parseDouble(txtDisplay.getText());
         double cubed = Math.pow(firstNum, 3);
         txtDisplay.setText(cubed + " ");
         txtEquation.setText(firstNum + " ^ 3 ");
     }//GEN-LAST:event_cubedBtnActionPerformed
+
+    private void txtDisplayKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDisplayKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDisplayKeyTyped
 
     /**
      * @param args the command line arguments
