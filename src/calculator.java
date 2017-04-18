@@ -617,7 +617,7 @@ public class calculator extends javax.swing.JFrame {
                     firstNum = answer;
 
                     // display answer in equation
-                    txtEquation.setText(answer + " +");
+                    txtEquation.setText(answer + "+");
 
                     // clear display
                     txtDisplay.setText("");
@@ -655,7 +655,7 @@ public class calculator extends javax.swing.JFrame {
             firstNum = Double.parseDouble(txtDisplay.getText());
 
             // display it in equation
-            txtEquation.setText(firstNum + " -");
+            txtEquation.setText(firstNum + "-");
 
             // clear display in txtDisplay
             txtDisplay.setText("");
@@ -670,7 +670,7 @@ public class calculator extends javax.swing.JFrame {
                 firstNum = Double.parseDouble(txtDisplay.getText());
 
                 // update equation display
-                txtEquation.setText(firstNum + " -");
+                txtEquation.setText(firstNum + "-");
 
                 // clear display
                 txtDisplay.setText("");
@@ -695,7 +695,7 @@ public class calculator extends javax.swing.JFrame {
                     firstNum = answer;
 
                     // display answer in equation
-                    txtEquation.setText(answer + " -");
+                    txtEquation.setText(answer + "-");
 
                     // clear display
                     txtDisplay.setText("");
@@ -730,7 +730,7 @@ public class calculator extends javax.swing.JFrame {
             firstNum = Double.parseDouble(txtDisplay.getText());
 
             // display it in equation
-            txtEquation.setText(firstNum + " /");
+            txtEquation.setText(firstNum + "/");
 
             // clear display in txtDisplay
             txtDisplay.setText("");
@@ -742,7 +742,7 @@ public class calculator extends javax.swing.JFrame {
                 firstNum = Double.parseDouble(txtDisplay.getText());
 
                 // update equation display
-                txtEquation.setText(firstNum + " -");
+                txtEquation.setText(firstNum + "/");
 
                 // clear display
                 txtDisplay.setText("");
@@ -772,7 +772,7 @@ public class calculator extends javax.swing.JFrame {
 
                 } else {
                     // don't replace current operation if it's plus
-                    if (!operator.equals("-")) {
+                    if (!operator.equals("/")) {
                         // extract operator (it's the last char.)
                         String operator = txtEquation.getText().charAt(txtEquation.getText().length() - 1) + "";
 
@@ -817,7 +817,7 @@ public class calculator extends javax.swing.JFrame {
 
                 // note operator
                 operator = "*";
-            }else if (txtEquation.getText().indexOf("/") != -1) {
+            }else if (txtEquation.getText().indexOf("*") != -1) {
 
                 // check if there's a second number
                 if (txtDisplay.getText().length() > 0) {
@@ -833,20 +833,21 @@ public class calculator extends javax.swing.JFrame {
                     firstNum = answer;
 
                     // display answer in equation
-                    txtEquation.setText(answer + " *");
+                    txtEquation.setText(answer + "*");
 
                     // clear display
                     txtDisplay.setText("");
 
                 } else {
                     // don't replace current operation if it's plus
-                    if (!operator.equals("-")) {
+                    if (!operator.equals("*")) {
                         // extract operator (it's the last char.)
                         String operator = txtEquation.getText().charAt(txtEquation.getText().length() - 1) + "";
-
+                        
+                      
                         // change current operator to +
                         txtEquation.setText(txtEquation.getText().replace(operator, "*"));
-
+                         
                         // note the operator
                         this.operator = "*";
 
@@ -868,9 +869,14 @@ public class calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_clearActionPerformed
 
     private void operanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operanActionPerformed
+        if (txtDisplay.getText().length() == 0){
+            txtDisplay.setText("");
+        }
+        else{
         double operan = (Double.parseDouble(String.valueOf(txtDisplay.getText())));
         operan = operan * (-1);
         txtDisplay.setText(String.valueOf(operan));
+        }
     }//GEN-LAST:event_operanActionPerformed
 
     private void squareBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareBtnActionPerformed
